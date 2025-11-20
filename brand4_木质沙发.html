@@ -1,0 +1,1709 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>品牌策略视觉板 - Zhong Zhixin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;600;700&family=Noto+Serif+SC:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --wood-primary: #6B4F33;
+            --wood-secondary: #A78C6D;
+            --wood-accent: #E5D9C3;
+            --wood-neutral: #F5F3F1;
+            --bg-dark: #0A0A0A;
+            --bg-darker: #050505;
+            --bg-wood: #1A1612;
+            --text-light: #E8E5E0;
+            --text-muted: #8B8578;
+            --text-wood: #C4B8A8;
+            --border-color: #2A2520;
+            --border-wood: #3D3429;
+        }
+
+        body {
+            font-family: 'Inter', 'Noto Serif SC', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        /* 优雅的滚动条 */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-darker);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--wood-secondary);
+            border-radius: 3px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--wood-accent);
+        }
+
+        /* 主容器 */
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0;
+        }
+
+        /* 英雄区域 - 全屏视觉冲击 */
+        .hero-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: 
+                radial-gradient(ellipse at 30% 50%, rgba(107, 79, 51, 0.15) 0%, transparent 60%),
+                radial-gradient(ellipse at 70% 30%, rgba(167, 140, 109, 0.08) 0%, transparent 50%),
+                linear-gradient(180deg, var(--bg-darker) 0%, var(--bg-dark) 100%);
+            overflow: hidden;
+            padding: 80px 40px;
+        }
+
+        /* 木纹纹理背景 */
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                repeating-linear-gradient(
+                    90deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(107, 79, 51, 0.03) 2px,
+                    rgba(107, 79, 51, 0.03) 4px
+                ),
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 1px,
+                    rgba(167, 140, 109, 0.02) 1px,
+                    rgba(167, 140, 109, 0.02) 2px
+                );
+            opacity: 0.4;
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 1000px;
+        }
+
+        .hero-subtitle {
+            font-family: 'Inter', 'Noto Sans SC', sans-serif;
+            font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+            font-weight: 300;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            opacity: 0.7;
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', 'Noto Serif SC', serif;
+            font-size: clamp(2.5rem, 7vw, 5.5rem);
+            font-weight: 600;
+            color: var(--text-light);
+            margin-bottom: 40px;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+            text-shadow: 0 4px 30px rgba(0, 0, 0, 0.6);
+        }
+
+        .hero-proposition {
+            font-family: 'Noto Serif SC', serif;
+            font-size: clamp(1.1rem, 2vw, 1.5rem);
+            color: var(--wood-accent);
+            margin-bottom: 50px;
+            line-height: 1.8;
+            font-weight: 400;
+            opacity: 0.95;
+        }
+
+        .hero-invitation {
+            font-family: 'Playfair Display', 'Noto Serif SC', serif;
+            font-size: clamp(1.3rem, 2.5vw, 2rem);
+            font-style: italic;
+            color: var(--text-wood);
+            line-height: 1.6;
+            margin-top: 60px;
+            padding: 50px 40px;
+            border-top: 1px solid var(--border-wood);
+            border-bottom: 1px solid var(--border-wood);
+            position: relative;
+        }
+
+        .hero-invitation::before,
+        .hero-invitation::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 1px;
+            background: var(--wood-secondary);
+            opacity: 0.5;
+        }
+
+        .hero-invitation::before {
+            top: 0;
+        }
+
+        .hero-invitation::after {
+            bottom: 0;
+        }
+
+        /* 内容区域 */
+        .content-wrapper {
+            padding: 120px 60px;
+        }
+
+        .section {
+            margin-bottom: 140px;
+            position: relative;
+        }
+
+        .section-header {
+            margin-bottom: 70px;
+            position: relative;
+        }
+
+        .section-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 0.95rem;
+            color: var(--wood-secondary);
+            letter-spacing: 0.2em;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            opacity: 0.8;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', 'Noto Serif SC', serif;
+            font-size: clamp(2.2rem, 4.5vw, 3.8rem);
+            font-weight: 600;
+            color: var(--text-light);
+            margin-bottom: 25px;
+            letter-spacing: -0.01em;
+            line-height: 1.2;
+        }
+
+        .section-divider {
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--wood-secondary), transparent);
+            margin-top: 25px;
+            opacity: 0.6;
+        }
+
+        /* 品牌核心网格 */
+        .core-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+            gap: 35px;
+            margin-bottom: 70px;
+        }
+
+        .core-card {
+            background: linear-gradient(135deg, rgba(107, 79, 51, 0.05) 0%, rgba(26, 22, 18, 0.8) 100%);
+            border: 1px solid var(--border-wood);
+            padding: 50px;
+            border-radius: 2px;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .core-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--wood-secondary), transparent);
+            transform: scaleY(0);
+            transition: transform 0.5s ease;
+        }
+
+        .core-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--wood-secondary);
+            box-shadow: 0 20px 60px rgba(107, 79, 51, 0.2);
+            background: linear-gradient(135deg, rgba(107, 79, 51, 0.08) 0%, rgba(26, 22, 18, 0.9) 100%);
+        }
+
+        .core-card:hover::before {
+            transform: scaleY(1);
+        }
+
+        .core-card-title {
+            font-family: 'Noto Sans SC', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--wood-accent);
+            margin-bottom: 25px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .core-card-content {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 1.05rem;
+            line-height: 2.2;
+            color: var(--text-light);
+            opacity: 0.92;
+        }
+
+        /* 品牌主张 - 大号展示 */
+        .brand-proposition {
+            background: linear-gradient(135deg, rgba(107, 79, 51, 0.12) 0%, rgba(167, 140, 109, 0.06) 100%);
+            border: 1px solid var(--border-wood);
+            padding: 90px 70px;
+            text-align: center;
+            margin: 70px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .brand-proposition::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                repeating-linear-gradient(
+                    45deg,
+                    transparent,
+                    transparent 20px,
+                    rgba(107, 79, 51, 0.03) 20px,
+                    rgba(107, 79, 51, 0.03) 21px
+                );
+            pointer-events: none;
+        }
+
+        .proposition-text {
+            font-family: 'Noto Serif SC', serif;
+            font-size: clamp(1.8rem, 3.5vw, 3rem);
+            font-weight: 500;
+            color: var(--text-light);
+            position: relative;
+            z-index: 1;
+            line-height: 1.6;
+            letter-spacing: 0.02em;
+        }
+
+        /* 视觉关键词标签 */
+        .keywords-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin: 35px 0;
+        }
+
+        .keyword-tag {
+            background: rgba(107, 79, 51, 0.15);
+            border: 1px solid rgba(167, 140, 109, 0.25);
+            color: var(--wood-accent);
+            padding: 10px 24px;
+            border-radius: 1px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.88rem;
+            font-weight: 400;
+            letter-spacing: 0.05em;
+            text-transform: lowercase;
+            transition: all 0.3s ease;
+        }
+
+        .keyword-tag:hover {
+            background: rgba(107, 79, 51, 0.25);
+            border-color: var(--wood-secondary);
+            transform: translateY(-2px);
+        }
+
+        /* 色彩系统展示 */
+        .color-system {
+            margin: 70px 0;
+        }
+
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
+            margin-top: 50px;
+        }
+
+        .color-card {
+            background: rgba(26, 22, 18, 0.6);
+            border: 1px solid var(--border-wood);
+            border-radius: 2px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .color-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 40px rgba(107, 79, 51, 0.25);
+            border-color: var(--wood-secondary);
+        }
+
+        .color-swatch {
+            height: 140px;
+            width: 100%;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .color-card:hover .color-swatch {
+            transform: scale(1.02);
+        }
+
+        .color-info {
+            padding: 28px;
+        }
+
+        .color-name {
+            font-family: 'Noto Sans SC', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--text-light);
+            margin-bottom: 10px;
+        }
+
+        .color-value {
+            font-family: 'Inter', monospace;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            letter-spacing: 0.05em;
+        }
+
+        /* 字体展示 */
+        .typography-showcase {
+            margin: 70px 0;
+        }
+
+        .font-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 35px;
+            margin-top: 50px;
+        }
+
+        .font-sample {
+            background: rgba(26, 22, 18, 0.5);
+            border: 1px solid var(--border-wood);
+            padding: 45px;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .font-sample:hover {
+            border-color: var(--wood-secondary);
+            background: rgba(26, 22, 18, 0.7);
+        }
+
+        .font-label {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            margin-bottom: 25px;
+            opacity: 0.7;
+        }
+
+        .font-display {
+            font-size: 2.2rem;
+            line-height: 1.4;
+            color: var(--text-light);
+            margin-bottom: 18px;
+        }
+
+        .font-display.en-heading {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+        }
+
+        .font-display.en-body {
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            font-size: 1.15rem;
+        }
+
+        .font-display.zh-heading {
+            font-family: 'Noto Sans SC', sans-serif;
+            font-weight: 600;
+        }
+
+        .font-display.zh-body {
+            font-family: 'Noto Serif SC', serif;
+            font-weight: 400;
+            font-size: 1.15rem;
+        }
+
+        /* 品牌故事 */
+        .brand-story-section {
+            background: linear-gradient(135deg, rgba(107, 79, 51, 0.06) 0%, rgba(26, 22, 18, 0.8) 100%);
+            border-left: 3px solid var(--wood-secondary);
+            padding: 70px;
+            margin: 70px 0;
+            position: relative;
+        }
+
+        .brand-story-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(167, 140, 109, 0.05) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .story-text {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 1.2rem;
+            line-height: 2.4;
+            color: var(--text-light);
+            opacity: 0.95;
+            max-width: 950px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Slogan候选 */
+        .slogan-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .slogan-card {
+            background: rgba(26, 22, 18, 0.6);
+            border: 1px solid var(--border-wood);
+            padding: 50px;
+            border-radius: 2px;
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .slogan-card:hover {
+            border-color: var(--wood-secondary);
+            transform: translateY(-5px);
+            box-shadow: 0 18px 50px rgba(107, 79, 51, 0.25);
+            background: rgba(26, 22, 18, 0.8);
+        }
+
+        .slogan-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.7rem;
+            font-weight: 600;
+            color: var(--text-light);
+            margin-bottom: 25px;
+            font-style: italic;
+            line-height: 1.5;
+        }
+
+        .slogan-reason {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 1rem;
+            color: var(--text-muted);
+            line-height: 2;
+            opacity: 0.9;
+        }
+
+        /* 语气标签 */
+        .tone-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin: 30px 0;
+        }
+
+        .tone-badge {
+            background: rgba(167, 140, 109, 0.12);
+            border: 1px solid rgba(167, 140, 109, 0.3);
+            color: var(--wood-accent);
+            padding: 10px 26px;
+            border-radius: 1px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.92rem;
+            font-weight: 400;
+            letter-spacing: 0.05em;
+            text-transform: lowercase;
+        }
+
+        /* 产品理念 */
+        .philosophy-section {
+            background: linear-gradient(135deg, rgba(107, 79, 51, 0.1) 0%, rgba(167, 140, 109, 0.05) 100%);
+            border: 1px solid var(--border-wood);
+            padding: 90px 70px;
+            text-align: center;
+            margin: 70px 0;
+            position: relative;
+        }
+
+        .philosophy-section::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(107, 79, 51, 0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .philosophy-text {
+            font-family: 'Noto Serif SC', serif;
+            font-size: clamp(1.25rem, 2.2vw, 1.7rem);
+            line-height: 2.2;
+            color: var(--text-light);
+            max-width: 1000px;
+            margin: 0 auto;
+            opacity: 0.95;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* 视觉风格描述 */
+        .visual-description {
+            background: rgba(26, 22, 18, 0.6);
+            border: 1px solid var(--border-wood);
+            padding: 55px;
+            margin: 50px 0;
+            border-radius: 2px;
+        }
+
+        .description-text {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 1.1rem;
+            line-height: 2.2;
+            color: var(--text-light);
+            opacity: 0.92;
+        }
+
+        /* 语气与审美卡片 */
+        .tone-aesthetic-card {
+            background: linear-gradient(135deg, rgba(107, 79, 51, 0.05) 0%, rgba(26, 22, 18, 0.8) 100%);
+            border: 1px solid var(--border-wood);
+            padding: 50px;
+            margin-top: 40px;
+            border-radius: 2px;
+        }
+
+        .tone-section {
+            margin-bottom: 30px;
+        }
+
+        .tone-label {
+            font-family: 'Noto Sans SC', sans-serif;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 15px;
+        }
+
+        .tone-value {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 1.05rem;
+            color: var(--wood-accent);
+            line-height: 2;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 1024px) {
+            .content-wrapper {
+                padding: 80px 40px;
+            }
+
+            .core-grid,
+            .slogan-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .content-wrapper {
+                padding: 60px 25px;
+            }
+
+            .hero-section {
+                padding: 60px 25px;
+            }
+
+            .core-card,
+            .brand-story-section,
+            .slogan-card,
+            .visual-description {
+                padding: 35px;
+            }
+
+            .brand-proposition,
+            .philosophy-section {
+                padding: 60px 40px;
+            }
+        }
+
+        /* 淡入动画 */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section {
+            animation: fadeInUp 1s ease-out;
+        }
+
+        /* 分隔线装饰 */
+        .decorative-line {
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border-wood), transparent);
+            margin: 100px 0;
+            opacity: 0.5;
+        }
+
+        /* 固定悬浮按钮 - 右下角聚合菜单 */
+        .floating-menu-container {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column-reverse;
+            align-items: flex-end;
+            gap: 15px;
+        }
+
+        /* 主触发按钮 */
+        .main-trigger-btn {
+            width: 220px;
+            height: 70px;
+            background: linear-gradient(135deg, rgba(107, 79, 51, 0.9) 0%, rgba(26, 22, 18, 1) 100%);
+            border: 1px solid var(--wood-secondary);
+            border-radius: 35px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            z-index: 1002;
+        }
+
+        .main-trigger-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 15px 50px rgba(107, 79, 51, 0.4);
+            background: linear-gradient(135deg, rgba(107, 79, 51, 1) 0%, rgba(26, 22, 18, 1) 100%);
+        }
+
+        .main-trigger-btn svg {
+            width: 28px;
+            height: 28px;
+            stroke: var(--wood-accent);
+            transition: transform 0.3s ease;
+        }
+
+        .main-trigger-btn.active svg {
+            transform: rotate(45deg);
+        }
+
+        .trigger-text {
+            font-family: 'Noto Sans SC', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--wood-accent);
+            letter-spacing: 0.05em;
+        }
+
+        /* 菜单项列表 */
+        .menu-items {
+            display: flex;
+            flex-direction: column-reverse;
+            gap: 12px;
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(20px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            margin-bottom: 10px;
+            align-items: flex-end;
+        }
+
+        .menu-items.active {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateY(0);
+        }
+
+        .menu-item {
+            background: rgba(26, 22, 18, 0.95);
+            border: 1px solid var(--border-wood);
+            border-radius: 12px;
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            min-width: 200px;
+            backdrop-filter: blur(10px);
+        }
+
+        .menu-item:hover {
+            background: rgba(107, 79, 51, 0.2);
+            border-color: var(--wood-secondary);
+            transform: translateX(-5px);
+        }
+
+        .menu-item svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--wood-secondary);
+            flex-shrink: 0;
+        }
+
+        .menu-item span {
+            font-family: 'Noto Sans SC', sans-serif;
+            font-size: 0.95rem;
+            color: var(--text-light);
+            white-space: nowrap;
+        }
+
+        .menu-item:hover span {
+            color: var(--wood-accent);
+        }
+
+        /* 开发中标签 */
+        .dev-tag {
+            font-size: 0.7rem;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: var(--text-muted);
+            margin-left: auto;
+        }
+
+        @media (max-width: 768px) {
+            .floating-menu-container {
+                right: 20px;
+                bottom: 30px;
+            }
+            
+            .main-trigger-btn {
+                width: 60px;
+                height: 60px;
+                border-radius: 30px;
+            }
+            
+            .trigger-text {
+                display: none;
+            }
+            
+            .menu-item {
+                min-width: auto;
+                padding: 10px 15px;
+            }
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(5, 5, 5, 0.95);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .modal-content {
+            position: relative;
+            width: 95vw;
+            max-width: 1400px;
+            height: 90vh;
+            background: rgba(26, 22, 18, 0.98);
+            border: 1px solid var(--border-wood);
+            border-radius: 4px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            animation: scaleIn 0.3s ease;
+            overflow: hidden;
+            display: flex;
+            flex-direction: row;
+        }
+
+        @keyframes scaleIn {
+            from {
+                transform: scale(0.9);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background: rgba(26, 22, 18, 0.9);
+            border: 1px solid var(--border-wood);
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            transition: all 0.3s ease;
+        }
+
+        .modal-close:hover {
+            background: rgba(107, 79, 51, 0.3);
+            border-color: var(--wood-secondary);
+            transform: rotate(90deg);
+        }
+
+        .modal-close svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--text-light);
+            stroke-width: 2;
+        }
+
+        .modal-preview {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(5, 5, 5, 0.5);
+            padding: 40px;
+            overflow: hidden;
+        }
+
+        .modal-panel {
+            width: 400px;
+            background: rgba(26, 22, 18, 0.95);
+            border-left: 1px solid var(--border-wood);
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+
+        .panel-title {
+            font-family: 'Noto Sans SC', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text-light);
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border-wood);
+        }
+
+        .prompt-label {
+            font-family: 'Noto Sans SC', sans-serif;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .prompt-textarea {
+            width: 100%;
+            min-height: 200px;
+            background: rgba(5, 5, 5, 0.5);
+            border: 1px solid var(--border-wood);
+            border-radius: 4px;
+            padding: 15px;
+            font-family: 'Noto Serif SC', serif;
+            font-size: 0.95rem;
+            color: var(--text-light);
+            line-height: 1.8;
+            resize: vertical;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        .prompt-textarea:focus {
+            outline: none;
+            border-color: var(--wood-secondary);
+            background: rgba(5, 5, 5, 0.7);
+        }
+
+        .regenerate-button {
+            width: 100%;
+            height: 50px;
+            background: linear-gradient(135deg, rgba(107, 79, 51, 0.3) 0%, rgba(26, 22, 18, 0.95) 100%);
+            border: 1px solid var(--border-wood);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-family: 'Noto Sans SC', sans-serif;
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--text-light);
+            margin-top: auto;
+        }
+
+        .regenerate-button:hover {
+            background: linear-gradient(135deg, rgba(107, 79, 51, 0.4) 0%, rgba(26, 22, 18, 1) 100%);
+            border-color: var(--wood-secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(107, 79, 51, 0.3);
+        }
+
+        .regenerate-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .regenerate-button svg {
+            width: 18px;
+            height: 18px;
+            stroke: var(--text-light);
+            stroke-width: 2;
+        }
+
+        .loading-indicator {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 15px;
+            color: var(--wood-accent);
+            font-family: 'Noto Sans SC', sans-serif;
+            font-size: 0.9rem;
+        }
+
+        .loading-indicator.active {
+            display: flex;
+        }
+
+        .loading-spinner {
+            width: 16px;
+            height: 16px;
+            border: 2px solid var(--border-wood);
+            border-top-color: var(--wood-accent);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .modal-media {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            display: block;
+            object-fit: contain;
+        }
+
+        .modal-video {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            display: block;
+        }
+
+        @media (max-width: 1024px) {
+            .modal-content {
+                flex-direction: column;
+                width: 95vw;
+                height: 95vh;
+            }
+
+            .modal-panel {
+                width: 100%;
+                max-height: 40vh;
+                border-left: none;
+                border-top: 1px solid var(--border-wood);
+            }
+
+            .modal-preview {
+                flex: 1;
+                min-height: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .floating-menu-container {
+                right: 20px;
+                bottom: 30px;
+            }
+            
+            .main-trigger-btn {
+                width: 60px;
+                height: 60px;
+                border-radius: 30px;
+            }
+
+            .main-trigger-btn svg {
+                width: 24px;
+                height: 24px;
+            }
+            
+            .trigger-text {
+                display: none;
+            }
+            
+            .menu-item {
+                min-width: auto;
+                padding: 12px 16px;
+                background: rgba(26, 22, 18, 0.98);
+            }
+            
+            .menu-item span {
+                font-size: 0.9rem;
+            }
+
+            .modal-content {
+                max-width: 95vw;
+                max-height: 95vh;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 英雄区域 -->
+    <div class="hero-section">
+        <div class="hero-content">
+            <div class="hero-subtitle">Zhong Zhixin</div>
+            <h1 class="hero-title">让实木呼吸东方<br>让生活回归自在</h1>
+            <div class="hero-proposition">我们为那些在都市节奏之外，渴望一席自然沉稳空间的生活者而生</div>
+            <div class="hero-invitation">坐进木的年轮，让空间慢下来。</div>
+        </div>
+    </div>
+
+    <!-- 内容区域 -->
+    <div class="content-wrapper">
+        <!-- 品牌核心 -->
+        <section class="section">
+            <div class="section-header">
+                <div class="section-number">01 / Brand Core</div>
+                <h2 class="section-title">品牌核心</h2>
+                <div class="section-divider"></div>
+            </div>
+
+            <div class="core-grid">
+                <div class="core-card">
+                    <div class="core-card-title">我们为谁而生</div>
+                    <div class="core-card-content">我们为那些在都市节奏之外，渴望一席自然沉稳空间的生活者而生 — 他们懂得木头的呼吸，欣赏东方木质家具的细节，却又不愿回到繁复的装饰，只愿在质地中发现宁静。</div>
+                </div>
+
+                <div class="core-card">
+                    <div class="core-card-title">品牌起源故事</div>
+                    <div class="core-card-content">几位设计师怀揣对东方木作工艺的热爱，在工业化板材家具泛滥的时代，决定把榫卯、实木、手作细节重新带入现代家居——于是"Zhong Zhixin"在一个老木厂的旧厂房中诞生。</div>
+                </div>
+
+                <div class="core-card">
+                    <div class="core-card-title">品牌独特感受</div>
+                    <div class="core-card-content">温润木纹、深浅交错、触手可感的质地；视觉上是柔光而不是强光，坐上沙发仿佛听到树的年轮在细语，空间因木而有温度。</div>
+                </div>
+
+                <div class="core-card">
+                    <div class="core-card-title">灵魂证据</div>
+                    <div class="core-card-content">每件沙发的框架皆选用实木，无贴皮、无掺杂板材；采用传统榫卯结构，扶手与木腿保留原木木纹细节；配合国际出口标准，环保漆面、低甲醛释放。</div>
+                </div>
+            </div>
+
+            <div class="brand-proposition">
+                <div class="proposition-text">让实木呼吸东方，让生活回归自在。</div>
+            </div>
+
+            <div class="tone-aesthetic-card">
+                <div class="tone-section">
+                    <div class="tone-label">语气</div>
+                    <div class="tone-value">温柔而坚定 / 诚挚而静谧 / 简约中见匠心</div>
+                </div>
+                <div style="margin-top: 30px;">
+                    <div class="tone-label" style="margin-bottom: 20px;">视觉关键词</div>
+                    <div class="keywords-container">
+                        <span class="keyword-tag">自然原木</span>
+                        <span class="keyword-tag">留白</span>
+                        <span class="keyword-tag">柔光</span>
+                        <span class="keyword-tag">东方极简</span>
+                        <span class="keyword-tag">木纹质感</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="decorative-line"></div>
+
+        <!-- 品牌元素 -->
+        <section class="section">
+            <div class="section-header">
+                <div class="section-number">02 / Brand Elements</div>
+                <h2 class="section-title">品牌元素</h2>
+                <div class="section-divider"></div>
+            </div>
+
+            <!-- 视觉体系 -->
+            <div style="margin-bottom: 80px;">
+                <h3 style="font-family: 'Noto Sans SC', sans-serif; font-size: 1.6rem; color: var(--wood-accent); margin-bottom: 35px; font-weight: 600;">视觉体系</h3>
+                
+                <div class="keywords-container">
+                    <span class="keyword-tag">natural wooden rhythm</span>
+                    <span class="keyword-tag">crafted eastern elegance</span>
+                    <span class="keyword-tag">modern oriental minimalism</span>
+                </div>
+
+                <!-- 色彩系统 -->
+                <div class="color-system">
+                    <h4 style="font-family: 'Noto Sans SC', sans-serif; font-size: 1.2rem; color: var(--text-light); margin-bottom: 25px; font-weight: 500;">色彩系统</h4>
+                    <div class="color-grid">
+                        <div class="color-card">
+                            <div class="color-swatch" style="background-color: #6B4F33;"></div>
+                            <div class="color-info">
+                                <div class="color-name">主色</div>
+                                <div class="color-value">#6B4F33</div>
+                            </div>
+                        </div>
+                        <div class="color-card">
+                            <div class="color-swatch" style="background-color: #A78C6D;"></div>
+                            <div class="color-info">
+                                <div class="color-name">次色</div>
+                                <div class="color-value">#A78C6D</div>
+                            </div>
+                        </div>
+                        <div class="color-card">
+                            <div class="color-swatch" style="background-color: #E5D9C3;"></div>
+                            <div class="color-info">
+                                <div class="color-name">强调色</div>
+                                <div class="color-value">#E5D9C3</div>
+                            </div>
+                        </div>
+                        <div class="color-card">
+                            <div class="color-swatch" style="background-color: #F5F3F1;"></div>
+                            <div class="color-info">
+                                <div class="color-name">中性色</div>
+                                <div class="color-value">#F5F3F1</div>
+                            </div>
+                        </div>
+                        <div class="color-card">
+                            <div class="color-swatch" style="background-color: #FFFFFF; border: 1px solid var(--border-wood);"></div>
+                            <div class="color-info">
+                                <div class="color-name">背景色</div>
+                                <div class="color-value">#FFFFFF</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 字体系统 -->
+                <div class="typography-showcase">
+                    <h4 style="font-family: 'Noto Sans SC', sans-serif; font-size: 1.2rem; color: var(--text-light); margin-bottom: 25px; font-weight: 500;">字体系统</h4>
+                    <div class="font-grid">
+                        <div class="font-sample">
+                            <div class="font-label">English Title</div>
+                            <div class="font-display en-heading">Playfair Display</div>
+                            <div class="font-display en-body" style="margin-top: 15px;">Breathe with Wood</div>
+                        </div>
+                        <div class="font-sample">
+                            <div class="font-label">English Body</div>
+                            <div class="font-display en-body">Inter</div>
+                            <div class="font-display en-body" style="margin-top: 15px;">Crafted for Quiet Living</div>
+                        </div>
+                        <div class="font-sample">
+                            <div class="font-label">中文标题</div>
+                            <div class="font-display zh-heading">思源黑体</div>
+                            <div class="font-display zh-body" style="margin-top: 15px;">让实木呼吸东方</div>
+                        </div>
+                        <div class="font-sample">
+                            <div class="font-label">中文正文</div>
+                            <div class="font-display zh-body">思源宋体</div>
+                            <div class="font-display zh-body" style="margin-top: 15px;">温润木纹、深浅交错、触手可感的质地；视觉上是柔光而不是强光，坐上沙发仿佛听到树的年轮在细语。</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 视觉风格描述 -->
+                <div class="visual-description">
+                    <h4 style="font-family: 'Noto Sans SC', sans-serif; font-size: 1.1rem; color: var(--wood-accent); margin-bottom: 25px; font-weight: 600;">视觉风格描述</h4>
+                    <div class="description-text">材质凸显原木纹理、光线柔和、视觉留白、排版简洁，东方比例与现代感融合，家具拍摄场景简约且具质感。</div>
+                </div>
+            </div>
+
+            <!-- 文案语气 -->
+            <div style="margin-top: 80px;">
+                <h3 style="font-family: 'Noto Sans SC', sans-serif; font-size: 1.6rem; color: var(--wood-accent); margin-bottom: 35px; font-weight: 600;">文案语气</h3>
+                <div class="tone-badges">
+                    <span class="tone-badge">calm</span>
+                    <span class="tone-badge">refined</span>
+                    <span class="tone-badge">authentic</span>
+                </div>
+                <p style="font-family: 'Noto Serif SC', serif; font-size: 1.05rem; color: var(--text-muted); line-height: 2.2; margin-top: 30px; max-width: 850px; opacity: 0.9;">
+                    语言简洁、诚挚、不卖弄华丽，强调木材的触感与生活的真实质地。
+                </p>
+            </div>
+        </section>
+
+        <div class="decorative-line"></div>
+
+        <!-- 品牌故事 -->
+        <section class="section">
+            <div class="section-header">
+                <div class="section-number">03 / Brand Story</div>
+                <h2 class="section-title">品牌故事</h2>
+                <div class="section-divider"></div>
+            </div>
+            <div class="brand-story-section">
+                <div class="story-text">
+                    在一个老旧木厂的车间里，几个怀揣东方木作情怀的设计师决定回归实木本质。他们发现市面上的家具大多用贴皮板、金属连接，缺少岁月沉淀与温暖质感。他们踏访原木林场，学习榫卯工艺，只为让一件沙发"呼吸"得像木头。终于，他们推出第一款沙发：实木框架、清晰木纹、东方比例、现代简洁，获得海外设计爱好者认可。我们承诺：每一件家具，都保留木的肌理与匠人的用心，让你在家感受自然与东方静雅。
+                </div>
+            </div>
+        </section>
+
+        <div class="decorative-line"></div>
+
+        <!-- Slogan候选 -->
+        <section class="section">
+            <div class="section-header">
+                <div class="section-number">04 / Slogan Candidates</div>
+                <h2 class="section-title">Slogan候选</h2>
+                <div class="section-divider"></div>
+            </div>
+            <div class="slogan-grid">
+                <div class="slogan-card">
+                    <div class="slogan-text">Breathe with Wood</div>
+                    <div class="slogan-reason">用"呼吸"暗示木材与生命的连接，传递自然、温度、放松的情绪。</div>
+                </div>
+                <div class="slogan-card">
+                    <div class="slogan-text">Crafted for Quiet Living</div>
+                    <div class="slogan-reason">强调"匠作 + 静居生活"，切中受众想要"宁静""质感家居"的痛点。</div>
+                </div>
+                <div class="slogan-card">
+                    <div class="slogan-text">East-Wood, Modern Heart</div>
+                    <div class="slogan-reason">融合"东方木质传统 + 现代心态"，突出品牌的文化混合与国际化定位。</div>
+                </div>
+            </div>
+        </section>
+
+        <div class="decorative-line"></div>
+
+        <!-- 产品理念 -->
+        <section class="section">
+            <div class="section-header">
+                <div class="section-number">05 / Product Philosophy</div>
+                <h2 class="section-title">产品理念</h2>
+                <div class="section-divider"></div>
+            </div>
+            <div class="philosophy-section">
+                <div class="philosophy-text">
+                    以自然为师，用匠心传递家的温度，让每件家具都有呼吸。
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- 悬浮菜单 -->
+    <div class="floating-menu-container">
+        <!-- 触发按钮 -->
+        <div class="main-trigger-btn" onclick="toggleMenu()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+            <span class="trigger-text">生成品牌素材</span>
+        </div>
+
+        <!-- 菜单项 -->
+        <div class="menu-items" id="menuItems">
+            
+            <!-- 现有功能 -->
+            <div class="menu-item" onclick="handleMenuClick('video')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="6" width="20" height="12" rx="2" ry="2"/>
+                    <path d="M10 10l6 4-6 4v-8z"/>
+                </svg>
+                <span>生成品牌视频</span>
+            </div>
+
+            <div class="menu-item" onclick="handleMenuClick('image')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                    <circle cx="8.5" cy="8.5" r="1.5"/>
+                    <path d="M21 15l-5-5L5 21"/>
+                </svg>
+                <span>生成图片素材</span>
+            </div>
+
+            <!-- 待开发功能 -->
+            <div class="menu-item" onclick="handleMenuClick('site')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="2" y1="12" x2="22" y2="12"></line>
+                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                </svg>
+                <span>生成独立站</span>
+                <span class="dev-tag">Dev</span>
+            </div>
+
+            <div class="menu-item" onclick="handleMenuClick('social')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+                </svg>
+                <span>生成社交推文</span>
+                <span class="dev-tag">Dev</span>
+            </div>
+
+            <div class="menu-item" onclick="handleMenuClick('campaign')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                    <line x1="16" y1="2" x2="16" y2="6"></line>
+                    <line x1="8" y1="2" x2="8" y2="6"></line>
+                    <line x1="3" y1="10" x2="21" y2="10"></line>
+                </svg>
+                <span>生成黑五营销案</span>
+                <span class="dev-tag">Dev</span>
+            </div>
+
+            <div class="menu-item" onclick="handleMenuClick('slogan')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                </svg>
+                <span>生成 Slogan</span>
+                <span class="dev-tag">Dev</span>
+            </div>
+
+            <div class="menu-item" onclick="handleMenuClick('email')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                    <polyline points="22,6 12,13 2,6"></polyline>
+                </svg>
+                <span>生成达人邀约邮件</span>
+                <span class="dev-tag">Dev</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 视频预览模态弹窗 -->
+    <div id="videoModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-close" onclick="closeModal('video')">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <line x1="18" y1="6" x2="6" y2="18"/>
+                    <line x1="6" y1="6" x2="18" y2="18"/>
+                </svg>
+            </div>
+            <div class="modal-preview">
+                <video id="videoPreview" class="modal-video" controls preload="auto">
+                    <source src="ComfyUI_木质沙发.mp4" type="video/mp4">
+                    您的浏览器不支持视频播放。
+                </video>
+            </div>
+            <div class="modal-panel">
+                <div class="panel-title">生成提示词</div>
+                <div class="prompt-label">视频生成提示词</div>
+                <textarea id="videoPrompt" class="prompt-textarea" placeholder="请输入视频生成提示词...">一个现代简约的木质沙发，放置在自然光线充足的客厅中。沙发采用实木框架，深棕色木纹清晰可见，搭配浅灰色布艺坐垫。背景是简洁的白色墙壁，地面铺有浅色木地板。整体风格体现东方极简美学，柔和的自然光线从左侧窗户洒入，营造出宁静舒适的氛围。镜头缓慢推进，展现沙发的细节和质感。</textarea>
+                <button class="regenerate-button" onclick="regenerateMedia('video')">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M1 4v6h6M23 20v-6h-6"/>
+                        <path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"/>
+                    </svg>
+                    重新生成视频
+                </button>
+                <div class="loading-indicator" id="videoLoading">
+                    <div class="loading-spinner"></div>
+                    <span>正在生成中...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 图片预览模态弹窗 -->
+    <div id="imageModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-close" onclick="closeModal('image')">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <line x1="18" y1="6" x2="6" y2="18"/>
+                    <line x1="6" y1="6" x2="18" y2="18"/>
+                </svg>
+            </div>
+            <div class="modal-preview">
+                <img id="imagePreview" src="banna_木质沙发.png" alt="品牌图片素材" class="modal-media" loading="eager">
+            </div>
+            <div class="modal-panel">
+                <div class="panel-title">生成提示词</div>
+                <div class="prompt-label">图片生成提示词</div>
+                <textarea id="imagePrompt" class="prompt-textarea" placeholder="请输入图片生成提示词...">现代简约的木质沙发，实木框架，深棕色木纹，浅灰色布艺坐垫，放置在自然光线充足的客厅中。背景是简洁的白色墙壁，浅色木地板。东方极简美学风格，柔和的自然光线，宁静舒适的氛围，高质量摄影，细节丰富，木纹质感清晰。</textarea>
+                <button class="regenerate-button" onclick="regenerateMedia('image')">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M1 4v6h6M23 20v-6h-6"/>
+                        <path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"/>
+                    </svg>
+                    重新生成图片
+                </button>
+                <div class="loading-indicator" id="imageLoading">
+                    <div class="loading-spinner"></div>
+                    <span>正在生成中...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 菜单控制
+        function toggleMenu() {
+            const menu = document.getElementById('menuItems');
+            const btn = document.querySelector('.main-trigger-btn');
+            menu.classList.toggle('active');
+            btn.classList.toggle('active');
+        }
+
+        // 处理菜单点击
+        function handleMenuClick(type) {
+            // 关闭菜单
+            toggleMenu();
+
+            // 功能路由
+            switch(type) {
+                case 'video':
+                    openModal('video');
+                    break;
+                case 'image':
+                    openModal('image');
+                    break;
+                case 'site':
+                case 'social':
+                case 'campaign':
+                case 'slogan':
+                case 'email':
+                    // 延迟一点显示提示，让菜单先收起
+                    setTimeout(() => {
+                        showToast('功能正在开发中，敬请期待...');
+                    }, 300);
+                    break;
+            }
+        }
+
+        // 简易 Toast 提示
+        function showToast(message) {
+            const toast = document.createElement('div');
+            toast.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: rgba(26, 22, 18, 0.95);
+                color: var(--wood-accent);
+                padding: 16px 32px;
+                border: 1px solid var(--wood-secondary);
+                border-radius: 8px;
+                z-index: 3000;
+                font-family: 'Noto Sans SC', sans-serif;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+                opacity: 0;
+                transition: opacity 0.3s ease;
+            `;
+            toast.textContent = message;
+            document.body.appendChild(toast);
+
+            // 强制重绘
+            toast.offsetHeight;
+            toast.style.opacity = '1';
+
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                setTimeout(() => toast.remove(), 300);
+            }, 2000);
+        }
+
+        // 预加载媒体资源
+        function preloadMedia() {
+            // 预加载视频
+            const video = document.createElement('video');
+            video.src = 'ComfyUI_木质沙发.mp4';
+            video.preload = 'auto';
+            video.style.display = 'none';
+            document.body.appendChild(video);
+            
+            // 预加载图片
+            const img = new Image();
+            img.src = 'banna_木质沙发.png';
+        }
+
+        // 页面加载时预加载
+        window.addEventListener('load', preloadMedia);
+
+        function openModal(type) {
+            const modal = document.getElementById(type + 'Modal');
+            if (modal) {
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+                
+                // 如果是视频，自动播放
+                if (type === 'video') {
+                    const video = document.getElementById('videoPreview');
+                    if (video) {
+                        video.play().catch(e => {
+                            console.log('自动播放被阻止，需要用户交互');
+                        });
+                    }
+                }
+            }
+        }
+
+        function closeModal(type) {
+            const modal = document.getElementById(type + 'Modal');
+            if (modal) {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+                
+                // 如果是视频，暂停播放
+                if (type === 'video') {
+                    const video = document.getElementById('videoPreview');
+                    if (video) {
+                        video.pause();
+                        video.currentTime = 0;
+                    }
+                }
+            }
+        }
+
+        // 重新生成媒体
+        async function regenerateMedia(type) {
+            const promptTextarea = document.getElementById(type + 'Prompt');
+            const loadingIndicator = document.getElementById(type + 'Loading');
+            const regenerateButton = document.querySelector(`#${type}Modal .regenerate-button`);
+            const prompt = promptTextarea.value.trim();
+
+            if (!prompt) {
+                alert('请输入生成提示词');
+                return;
+            }
+
+            // 显示加载状态
+            regenerateButton.disabled = true;
+            loadingIndicator.classList.add('active');
+
+            try {
+                // 模拟API调用（实际使用时需要替换为真实的API端点）
+                await simulateGeneration(type, prompt);
+                
+                // 这里应该调用实际的生成API
+                // const response = await fetch('/api/generate', {
+                //     method: 'POST',
+                //     headers: { 'Content-Type': 'application/json' },
+                //     body: JSON.stringify({ type, prompt })
+                // });
+                // const result = await response.json();
+                
+            } catch (error) {
+                console.error('生成失败:', error);
+                alert('生成失败，请稍后重试');
+            } finally {
+                regenerateButton.disabled = false;
+                loadingIndicator.classList.remove('active');
+            }
+        }
+
+        // 模拟生成过程（实际使用时删除此函数，使用真实API）
+        function simulateGeneration(type, prompt) {
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    // 模拟生成完成
+                    console.log(`生成${type === 'video' ? '视频' : '图片'}，提示词：`, prompt);
+                    
+                    // 实际应用中，这里应该更新预览的媒体URL
+                    // if (type === 'video') {
+                    //     document.getElementById('videoPreview').src = result.videoUrl;
+                    // } else {
+                    //     document.getElementById('imagePreview').src = result.imageUrl;
+                    // }
+                    
+                    alert(`已使用新的提示词生成${type === 'video' ? '视频' : '图片'}！\n提示词：${prompt.substring(0, 50)}...`);
+                    resolve();
+                }, 2000); // 模拟2秒生成时间
+            });
+        }
+
+        // 点击遮罩层关闭弹窗
+        document.querySelectorAll('.modal').forEach(modal => {
+            modal.addEventListener('click', function(e) {
+                if (e.target === this) {
+                    const type = this.id.replace('Modal', '');
+                    closeModal(type);
+                }
+            });
+        });
+
+        // ESC键关闭弹窗
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.modal.active').forEach(modal => {
+                    const type = modal.id.replace('Modal', '');
+                    closeModal(type);
+                });
+            }
+        });
+    </script>
+</body>
+</html>
+

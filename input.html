@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>构建您的品牌 - 出海故事</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Design Tokens based on brand4_木质沙发.html (Dark Wood Theme) */
+            --bg-page: #0A0A0A;      /* --bg-dark */
+            --surface: #1A1612;      /* --bg-wood */
+            --text-main: #E8E5E0;    /* --text-light */
+            --text-sub: #8B8578;     /* --text-muted */
+            --line: #2A2520;         /* --border-color */
+            --chip-bg: #2A2520;
+            --primary: #A78C6D;      /* --wood-secondary */
+            --radius: 16px;
+            --shadow: 0 10px 30px rgba(0,0,0,0.5);
+            --transition: all 0.2s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Noto Sans SC', sans-serif;
+            background-color: var(--bg-page);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .navbar {
+            background: var(--surface);
+            border-bottom: 1px solid var(--line);
+            padding: 1.25rem 2rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-main);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .main-content {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4rem 2rem;
+        }
+
+        /* Card Style Form */
+        .form-card {
+            background: var(--surface);
+            padding: 3rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            border: 1px solid var(--line);
+            width: 100%;
+            max-width: 640px;
+        }
+
+        .card-header {
+            margin-bottom: 2.5rem;
+            text-align: center;
+        }
+
+        .card-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.02em;
+            color: var(--text-main);
+        }
+
+        .card-subtitle {
+            color: var(--text-sub);
+            font-size: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+        }
+
+        .form-label {
+            display: block;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 0.75rem;
+            color: var(--primary); /* Accent color for labels */
+        }
+
+        .form-input, .form-textarea {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            border: 1px solid var(--line);
+            background: var(--bg-page);
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: var(--transition);
+            font-family: inherit;
+            color: var(--text-main);
+        }
+
+        .form-input:focus, .form-textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: rgba(167, 140, 109, 0.05);
+            box-shadow: 0 0 0 2px rgba(167, 140, 109, 0.1);
+        }
+
+        .form-textarea {
+            min-height: 140px;
+            resize: vertical;
+            line-height: 1.6;
+        }
+
+        /* File Upload Styling */
+        .file-upload {
+            border: 1px dashed var(--line);
+            background: var(--bg-page);
+            border-radius: 12px;
+            padding: 2.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden; /* For image containment */
+        }
+
+        .file-upload:hover {
+            border-color: var(--primary);
+            background: rgba(167, 140, 109, 0.05);
+        }
+
+        .file-upload input[type="file"] {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            cursor: pointer;
+            z-index: 10; /* Ensure it's clickable */
+        }
+
+        .upload-icon {
+            width: 40px;
+            height: 40px;
+            color: var(--text-sub);
+            margin-bottom: 1rem;
+            background: var(--surface);
+            padding: 8px;
+            border-radius: 50%;
+            border: 1px solid var(--line);
+        }
+
+        .upload-text {
+            color: var(--text-sub);
+            font-size: 0.875rem;
+        }
+
+        .preview-image {
+            max-width: 100%;
+            max-height: 240px;
+            margin-top: 1rem;
+            border-radius: 8px;
+            display: none;
+            object-fit: contain;
+            border: 1px solid var(--line);
+            /* Position correction */
+            position: relative;
+            z-index: 5;
+        }
+
+        /* Button Styling */
+        .submit-btn {
+            width: 100%;
+            padding: 1rem;
+            background-color: var(--primary);
+            color: #1A1612; /* Dark text on gold/brown button for contrast */
+            border: 1px solid var(--primary);
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 1rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .submit-btn:hover {
+            background-color: #bfa382;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(167, 140, 109, 0.2);
+        }
+        
+        .submit-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .loading-spinner {
+            border: 2px solid rgba(26, 22, 18, 0.3);
+            border-radius: 50%;
+            border-top: 2px solid #1A1612;
+            width: 18px;
+            height: 18px;
+            animation: spin 0.8s linear infinite;
+            display: none;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="index.html" class="logo">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                <line x1="12" y1="22.08" x2="12" y2="12"></line>
+            </svg>
+            出海故事
+        </a>
+    </nav>
+
+    <div class="main-content">
+        <div class="form-card">
+            <div class="card-header">
+                <h1 class="card-title">开启品牌焕新</h1>
+                <p class="card-subtitle">输入基础信息，AI 将为您提炼品牌基因与视觉系统</p>
+            </div>
+            <form id="brandForm">
+                <div class="form-group">
+                    <label class="form-label" for="brandName">企业/品牌名称</label>
+                    <!-- Pre-filled with Brand 4 Name -->
+                    <input type="text" id="brandName" class="form-input" placeholder="例如：Zhong Zhixin" required value="Zhong Zhixin">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="brandDesc">品牌/产品背景描述</label>
+                    <!-- Pre-filled with Brand 4 Story -->
+                    <textarea id="brandDesc" class="form-textarea" placeholder="请简述您的创始初心、主营产品特点、目标用户群体以及您希望传递的品牌感受..." required>我们为那些在都市节奏之外，渴望一席自然沉稳空间的生活者而生。几位设计师怀揣对东方木作工艺的热爱，在工业化板材家具泛滥的时代，决定把榫卯、实木、手作细节重新带入现代家居。我们的家具拥有温润木纹、深浅交错的触感，视觉上呈现柔光。我们坚持使用实木框架，无贴皮，保留原木细节，让实木呼吸东方，让生活回归自在。</textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">核心产品视觉</label>
+                    <div class="file-upload" id="dropZone">
+                        <input type="file" id="productImage" accept="image/*">
+                        <svg class="upload-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                        </svg>
+                        <p class="upload-text">点击或拖拽图片至此处上传</p>
+                        <img id="preview" class="preview-image" alt="预览">
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-btn" id="submitBtn">
+                    <div class="loading-spinner"></div>
+                    <span>生成品牌全案</span>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('brandForm');
+        const fileInput = document.getElementById('productImage');
+        const preview = document.getElementById('preview');
+        const uploadText = document.querySelector('.upload-text');
+        const uploadIcon = document.querySelector('.upload-icon');
+        const submitBtn = document.getElementById('submitBtn');
+        const spinner = document.querySelector('.loading-spinner');
+        const btnText = submitBtn.querySelector('span');
+
+        // 预加载演示图片
+        window.addEventListener('load', function() {
+            const demoImage = '沙发_副本.png';
+            preview.src = demoImage;
+            preview.style.display = 'block';
+            uploadText.style.display = 'none';
+            uploadIcon.style.display = 'none';
+            
+            // 调整 file-upload 容器的内边距，适应已有图片的状态
+            document.querySelector('.file-upload').style.padding = '1rem';
+        });
+
+        // 图片预览
+        fileInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                    uploadText.style.display = 'none';
+                    uploadIcon.style.display = 'none';
+                    document.querySelector('.file-upload').style.padding = '1rem';
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // 表单提交
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const brandName = document.getElementById('brandName').value;
+            const brandDesc = document.getElementById('brandDesc').value;
+            const imageSrc = preview.src; // Will get '沙发_副本.png' (relative) or Base64
+
+            if (!brandName || !brandDesc || !imageSrc || imageSrc === window.location.href) {
+                alert('请填写完整信息');
+                return;
+            }
+
+            // 模拟加载状态
+            submitBtn.disabled = true;
+            spinner.style.display = 'block';
+            btnText.textContent = 'AI 正在提炼品牌基因...';
+
+            // 存储数据
+            const brandData = {
+                name: brandName,
+                description: brandDesc,
+                image: imageSrc,
+                timestamp: new Date().toISOString()
+            };
+            
+            localStorage.setItem('generatedBrandData', JSON.stringify(brandData));
+
+            // 模拟API延迟，然后跳转
+            setTimeout(() => {
+                // 跳转到指定的目标页面
+                window.location.href = 'brand4_木质沙发.html';
+            }, 1500);
+        });
+    </script>
+</body>
+</html>
